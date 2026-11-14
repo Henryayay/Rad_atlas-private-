@@ -24,6 +24,47 @@ export type CassetteOrientation = 'Vertical' | 'Horizontal' | 'Diagonal';
 export type MarkerType = 'Supine' | 'Prone' | (string & {});
 
 /**
+ * Anatomical silhouette type rendered in the 2D BeamDiagramSVG.
+ */
+export type DiagramSilhouette =
+  | 'skull-sagittal'
+  | 'skull-frontal'
+  | 'torso-sagittal'
+  | 'torso-frontal'
+  | 'shoulder-axial'
+  | 'limb-joint';
+
+/**
+ * Projection viewing plane for the 2D geometry diagram.
+ * - `sagittal`: side profile (Cephalad = Up, Caudad = Down)
+ * - `axial`: top-down cross-section (shows RAO/LAO/RPO/LPO body rotation relative to IR)
+ */
+export type DiagramViewPlane = 'sagittal' | 'axial';
+
+/**
+ * Coordinates on the silhouette where the Central Ray (CR) crosshair lands.
+ * Values are offsets relative to the silhouette center `(0, 0)`.
+ */
+export interface DiagramCRTarget {
+  x: number;
+  y: number;
+}
+
+/**
+ * Geometric configuration for rendering an anatomically accurate 2D radiographic diagram.
+ */
+export interface ProjectionDiagramConfig {
+  /** Vector silhouette to draw */
+  silhouette: DiagramSilhouette;
+  /** Viewing plane ('sagittal' side profile or 'axial' top-down cross-section) */
+  viewPlane: DiagramViewPlane;
+  /** Target point on the silhouette where the Central Ray crosshair lands */
+  crTarget: DiagramCRTarget;
+  /** Optional anatomical baseline label (e.g. 'OML', 'IOML', 'MSP') */
+  baselineLabel?: string;
+}
+
+/**
  * Equipment and image receptor configuration for a radiographic projection.
  */
 export interface ProjectionEquipment {
@@ -135,4 +176,6 @@ export interface Projection {
   imageCriteria: string[];
   /** Common positioning errors, anatomical causes, and exact corrective adjustments */
   troubleshooting: ProjectionTroubleshootingItem[];
+  /** Optional 2D SVG diagram geometry configuration (falls back to region-based defaults if omitted) */
+  diagramConfig?: ProjectionDiagramConfig;
 }
