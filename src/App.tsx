@@ -59,9 +59,19 @@ export const App: React.FC = () => {
   }, [filteredProjections, selectedId]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col overflow-x-clip">
+    <div
+      className="min-h-screen bg-slate-950 text-slate-100 flex flex-col overflow-x-clip"
+      style={{
+        paddingLeft: 'env(safe-area-inset-left)',
+        paddingRight: 'env(safe-area-inset-right)',
+        paddingBottom: 'env(safe-area-inset-bottom)',
+      }}
+    >
       {/* Slim Single-Line Top Bar + Scrollable Region Filter Pills */}
-      <header className="sticky top-0 z-30 w-full overflow-x-clip border-b border-slate-800/80 bg-slate-950/95 backdrop-blur-md">
+      <header
+        className="sticky top-0 z-30 w-full overflow-x-clip border-b border-slate-800/80 bg-slate-950/95 backdrop-blur-md"
+        style={{ paddingTop: 'env(safe-area-inset-top)' }}
+      >
         <div className="max-w-7xl w-full mx-auto px-3 sm:px-5 py-2.5 min-w-0">
           <SearchBar
             isOnline={isOnline}

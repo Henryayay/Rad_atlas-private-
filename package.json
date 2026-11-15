@@ -2,10 +2,18 @@
   "name": "rad-atlas",
   "private": true,
   "version": "0.1.0",
+  "description": "100% Offline Dark-Mode Radiographic Positioning, Exposure & Troubleshooting Atlas",
+  "author": "RadAtlas",
+  "main": "electron/main.cjs",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:singlefile": "tsc -b && vite build --mode singlefile && node -e \"require('fs').copyFileSync('release/singlefile/index.html','release/RadAtlas-Offline.html')\"",
+    "build:desktop:web": "tsc -b && vite build --mode desktop",
+    "build:win": "npm run build:desktop:web && electron-builder --win",
+    "build:all": "npm run build && npm run build:singlefile && npm run build:win",
+    "electron:preview": "npm run build:desktop:web && electron .",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -20,6 +28,8 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "electron": "^45.3.2",
+    "electron-builder": "^26.18.0",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
@@ -30,6 +40,7 @@
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5",
     "vite-plugin-pwa": "^0.21.1",
+    "vite-plugin-singlefile": "^2.3.4",
     "workbox-window": "^7.3.0"
   }
 }

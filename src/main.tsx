@@ -4,8 +4,14 @@ import { registerSW } from 'virtual:pwa-register';
 import './index.css';
 import App from './App.tsx';
 
-// Register the PWA service worker for immediate 100% offline readiness
-registerSW({ immediate: true });
+// Register the PWA service worker only over HTTP(S) (skipped in Electron / file:// standalone HTML)
+if (
+  typeof window !== 'undefined' &&
+  'serviceWorker' in navigator &&
+  (window.location.protocol === 'https:' || window.location.protocol === 'http:')
+) {
+  registerSW({ immediate: true });
+}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

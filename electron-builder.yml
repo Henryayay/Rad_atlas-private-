@@ -1,0 +1,41 @@
+appId: com.radatlas.offline
+productName: RadAtlas
+copyright: Copyright © 2026 RadAtlas
+directories:
+  output: release/desktop
+  buildResources: build
+files:
+  - dist-desktop/**/*
+  - electron/**/*
+  - build/icon.png
+  - package.json
+asar: true
+win:
+  icon: build/icon.png
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: RadAtlas
+portable:
+  artifactName: RadAtlas-Portable-${version}.exe
+mac:
+  icon: build/icon.png
+  category: public.app-category.medical
+  target:
+    - dmg
+    - zip
+linux:
+  icon: build/icon.png
+  category: Education
+  target:
+    - AppImage
+    - deb
