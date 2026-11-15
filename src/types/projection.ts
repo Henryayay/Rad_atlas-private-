@@ -1,16 +1,15 @@
 /**
- * Anatomical regions covered by the Radiographic Positioning Atlas.
+ * Anatomical regions covered by the Radiographic Positioning Atlas,
+ * aligned with the `views_diagrams/` folder categories.
  */
 export type AnatomicalRegion =
-  | 'Chest & Thorax'
+  | 'Chest'
   | 'Abdomen'
-  | 'Upper Extremity'
-  | 'Shoulder Girdle'
-  | 'Lower Extremity'
-  | 'Pelvic Girdle'
-  | 'Cervical Spine'
-  | 'Thoracic & Lumbar Spine'
-  | 'Skull & Facial Bones'
+  | 'Upper Limbs'
+  | 'Lower Limbs'
+  | 'Pelvis & Hips'
+  | 'Spine'
+  | 'Skull'
   | (string & {});
 
 /**
@@ -176,6 +175,8 @@ export interface Projection {
   imageCriteria: string[];
   /** Common positioning errors, anatomical causes, and exact corrective adjustments */
   troubleshooting: ProjectionTroubleshootingItem[];
-  /** Optional 2D SVG diagram geometry configuration (falls back to region-based defaults if omitted) */
+  /** Optional lecture diagram image URL from `views_diagrams/` (replaces the fallback 2D SVG when provided) */
+  diagramImage?: string;
+  /** Optional 2D SVG diagram geometry configuration (used when `diagramImage` is not provided) */
   diagramConfig?: ProjectionDiagramConfig;
 }

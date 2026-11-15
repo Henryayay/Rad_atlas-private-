@@ -6,15 +6,13 @@ import { ProjectionViewCard } from './components/ProjectionViewCard';
 
 const REGIONS: readonly ('All' | AnatomicalRegion)[] = [
   'All',
-  'Chest & Thorax',
+  'Chest',
   'Abdomen',
-  'Upper Extremity',
-  'Shoulder Girdle',
-  'Lower Extremity',
-  'Pelvic Girdle',
-  'Cervical Spine',
-  'Thoracic & Lumbar Spine',
-  'Skull & Facial Bones',
+  'Upper Limbs',
+  'Lower Limbs',
+  'Pelvis & Hips',
+  'Spine',
+  'Skull',
 ];
 
 export const App: React.FC = () => {

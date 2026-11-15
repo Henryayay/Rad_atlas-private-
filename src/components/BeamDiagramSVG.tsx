@@ -443,7 +443,11 @@ export const BeamDiagramSVG: React.FC<BeamDiagramSVGProps> = ({
         <div className="flex items-center gap-1.5 min-w-0">
           <Compass className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
           <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-200 truncate">
-            {config.viewPlane === 'axial' ? 'Axial Cross-Section' : 'Sagittal Profile'}
+            {projection.diagramImage
+              ? 'Positioning & CR Diagram'
+              : config.viewPlane === 'axial'
+                ? 'Axial Cross-Section'
+                : 'Sagittal Profile'}
           </span>
           {traumaMode && (
             <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/40 shrink-0">
@@ -487,9 +491,21 @@ export const BeamDiagramSVG: React.FC<BeamDiagramSVGProps> = ({
         </div>
       )}
 
-      {/* Generous 420x320 SVG Canvas */}
-      <div className="p-2">
-        <svg
+      {projection.diagramImage ? (
+        <div className="p-2.5 bg-slate-950">
+          <div className="rounded-lg bg-white p-2 flex items-center justify-center overflow-hidden shadow-inner">
+            <img
+              src={projection.diagramImage}
+              alt={`Positioning diagram for ${projection.name}`}
+              className="max-h-[340px] w-auto max-w-full object-contain select-none"
+              loading="eager"
+            />
+          </div>
+        </div>
+      ) : (
+        /* Generous 420x320 SVG Canvas (Fallback for projections without a lecture diagram image) */
+        <div className="p-2">
+          <svg
           viewBox="0 0 420 320"
           className="w-full h-auto block select-none"
           role="img"
@@ -944,6 +960,7 @@ export const BeamDiagramSVG: React.FC<BeamDiagramSVGProps> = ({
           </g>
         </svg>
       </div>
+      )}
     </div>
   );
 };

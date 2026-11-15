@@ -15,7 +15,7 @@ export default defineConfig({
         'pwa-512x512.svg',
       ],
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2,json}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,webp,svg,woff,woff2,json}'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true,
